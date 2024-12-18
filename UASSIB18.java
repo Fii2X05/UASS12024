@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class UASSIB18 {
     static Scanner sc18 = new Scanner(System.in);
     static String[] namaTim18;
-    static int[][] skorTim18; 
-    static int[] totalSkor18; 
+    static int[][] skorTim18;
+    static int[] totalSkor18;
 
     public static void main(String[] args) {
         int pilihan18;
@@ -23,27 +23,22 @@ public class UASSIB18 {
             pilihan18 = sc18.nextInt();
             sc18.nextLine();
 
-            switch (pilihan18) {
-                case 1:
-                    inputDataSkor18();
-                    break;
-                case 2:
-                    tampilkanTabelSkor18();
-                    break;
-                case 3:
-                    tentukanJuara18();
-                    break;
-                case 4:
-                    System.out.println("Terima kasih! Program selesai.");
-                    break;
-                default:
-                    System.out.println("Pilihan tidak valid. Coba lagi!");
+            if (pilihan18 == 1) {
+                inputDataSkor18();
+            } else if (pilihan18 == 2) {
+                tampilkanTabelSkor18();
+            } else if (pilihan18 == 3) {
+                tentukanJuara18();
+            } else if (pilihan18 == 4) {
+                System.out.println("Terima kasih! Program selesai.");
+            } else {
+                System.out.println("Pilihan tidak valid. Coba lagi!");
             }
         } while (pilihan18 != 4);
     }
 
     static void inputDataSkor18() {
-        int jumlahTim18 = (20 % 3) + 4; 
+        int jumlahTim18 = (20 % 3) + 4;
         namaTim18 = new String[jumlahTim18];
         skorTim18 = new int[jumlahTim18][2];
         totalSkor18 = new int[jumlahTim18];
@@ -63,16 +58,18 @@ public class UASSIB18 {
                     }
                 } while (skor18 < 0);
 
-                skorTim18[i18][j18] = skor18 < 35 ? 0 : skor18; 
+                if (j18 == 0 && skor18 < 35) {
+                    skorTim18[i18][j18] = 0;
+                } else {
+                    skorTim18[i18][j18] = skor18;
+                }
             }
-            sc18.nextLine(); 
+            sc18.nextLine();
 
             totalSkor18[i18] = skorTim18[i18][0] + skorTim18[i18][1];
-
             if (skorTim18[i18][0] > 50 && skorTim18[i18][1] > 50) {
                 totalSkor18[i18] += 18;
             }
-
             if (totalSkor18[i18] % 2 == 0) {
                 totalSkor18[i18] -= 15;
             }
@@ -109,7 +106,7 @@ public class UASSIB18 {
                 juara18 = i18;
                 seri18 = false;
             } else if (totalSkor18[i18] == maxSkor18) {
-                if (skorTim18[i18][1] == skorTim18[juara18][1]) { 
+                if (skorTim18[i18][1] == skorTim18[juara18][1]) {
                     seri18 = true;
                 }
             }
